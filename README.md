@@ -1,6 +1,6 @@
 # sudarshana — Security Assessment Toolkit. Security assessment toolkit
 
-Security Assessment Toolkit. Security assessment toolkit. sudarshana gives you a focused, inspectable implementation of that idea.
+Security Assessment Toolkit. Security assessment toolkit.
 
 ## Why sudarshana
 
