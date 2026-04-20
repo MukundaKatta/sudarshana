@@ -79,3 +79,34 @@ export function severityOf(score) {
 export function score(vector) {
   return baseScore(parseVector(vector));
 }
+
+export function createAssessmentWorkflow({ asset, owner, framework = "internal-review", steps = [] }) {
+  return {
+    asset,
+    owner,
+    framework,
+    steps: steps.length > 0
+      ? steps
+      : ["scope", "evidence-collection", "severity-review", "report-export"],
+  };
+}
+
+export function packageEvidence(items) {
+  return items.map((item, index) => ({
+    id: item.id ?? `evidence-${index + 1}`,
+    type: item.type ?? "note",
+    summary: item.summary,
+    attachmentCount: item.attachments?.length ?? 0,
+  }));
+}
+
+export function exportAssessmentReport({ title, vector, evidence = [] }) {
+  const result = score(vector);
+  return {
+    title,
+    score: result.base,
+    severity: result.severity,
+    evidence: packageEvidence(evidence),
+    summary: `Assessment exported with ${result.severity} severity and ${evidence.length} evidence item(s).`,
+  };
+}
